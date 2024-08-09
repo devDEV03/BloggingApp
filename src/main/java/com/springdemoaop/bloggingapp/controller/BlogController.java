@@ -95,4 +95,9 @@ public class BlogController {
         return ResponseEntity.ok(bloggingService.setPosts(postId,posts));
     }
 
+    @PutMapping("/comments/{id}")
+    public ResponseEntity<Comments> setComments(@PathVariable Long commentId, @RequestBody Comments comments){
+        return ResponseEntity.ok(bloggingService.setComments(commentId,comments));
+    }
+
 }

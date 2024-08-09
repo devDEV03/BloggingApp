@@ -37,4 +37,6 @@ public interface BloggingService {
     Users setUser(Long userId, Users users);
 
     Posts setPosts(Long postId, Posts posts);
+
+    Comments setComments(Long commentId, Comments comments);
 }
