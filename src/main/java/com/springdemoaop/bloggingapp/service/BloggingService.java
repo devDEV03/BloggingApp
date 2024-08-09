@@ -33,4 +33,8 @@ public interface BloggingService {
     void deleteComment(Long commentId);
 
     void deletePost(Long postId);
+
+    Users setUser(Long userId, Users users);
+
+    Posts setPosts(Long postId, Posts posts);
 }

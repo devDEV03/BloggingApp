@@ -6,10 +6,12 @@ import com.springdemoaop.bloggingapp.entity.Users;
 import com.springdemoaop.bloggingapp.repository.commentRepository;
 import com.springdemoaop.bloggingapp.repository.postRepository;
 import com.springdemoaop.bloggingapp.repository.userRepository;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 
 @Service
@@ -86,6 +88,46 @@ public class BloggingServiceImpl implements BloggingService{
     public void deletePost(Long postId) {
         Posts posts = postRepo.findById(postId).orElseThrow(() -> new RuntimeException(""));
         postRepo.delete(posts);
+    }
+
+    @Override
+    public Users setUser(Long userId, Users users) {
+        Users user1 = userRepo.findById(userId).orElseThrow(() -> new RuntimeException(""));
+
+        if(Objects.nonNull(users.getUsername()) && !"".equalsIgnoreCase(users.getUsername())){
+            user1.setUsername(users.getUsername());
+        }
+
+        if(Objects.nonNull(users.getPassword()) && !"".equalsIgnoreCase(users.getPassword())){
+            user1.setPassword(users.getPassword());
+        }
+
+        if(Objects.nonNull(users.getEmail()) && !"".equalsIgnoreCase(users.getEmail())){
+            user1.setEmail(users.getEmail());
+        }
+        return users;
+    }
+
+    @Override
+    public Posts setPosts(Long postId, Posts posts) {
+        Posts postDep = postRepo.findById(postId).orElseThrow(() -> new RuntimeException(""));
+
+        if (Objects.nonNull(posts.getTitle()) && !"".equalsIgnoreCase(posts.getTitle())){
+            postDep.setTitle(posts.getTitle());
+        }
+        if (Objects.nonNull(posts.getContent()) && !"".equalsIgnoreCase(posts.getContent())){
+            postDep.setContent(posts.getContent());
+        }
+        if (Objects.nonNull(posts.getUsers())){
+            postDep.setUsers(posts.getUsers());
+        }
+        if (Objects.nonNull(posts.getCreatedAt())){
+            postDep.setCreatedAt(posts.getCreatedAt());
+        }
+        if (Objects.nonNull(posts.getUpdatedAt())){
+            postDep.setUpdatedAt(posts.getUpdatedAt());
+        }
+        return postDep;
     }
 
 

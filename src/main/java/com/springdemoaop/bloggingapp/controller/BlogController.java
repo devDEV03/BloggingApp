@@ -84,4 +84,15 @@ public class BlogController {
     public void deletePost(@PathVariable Long postId){
         bloggingService.deletePost(postId);
     }
+
+    @PutMapping("/users/{id}")
+    public ResponseEntity<Users> setUser(@PathVariable Long userId, @RequestBody Users users){
+        return ResponseEntity.ok(bloggingService.setUser(userId,users));
+    }
+
+    @PutMapping("/posts/{id}")
+    public ResponseEntity<Posts> setPosts(@PathVariable Long postId, @RequestBody Posts posts){
+        return ResponseEntity.ok(bloggingService.setPosts(postId,posts));
+    }
+
 }
